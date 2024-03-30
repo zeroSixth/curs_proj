@@ -30,7 +30,8 @@ class TestJSONSaver(unittest.TestCase):
         vacancy = Vacancy("Developer", "http://example.com", {"from": 1000, "to": 2000, "currency": "USD"}, "Description")
 
         saver.add_vacancy(vacancy)
-
+        write_call = mock.call(filename, 'w')  # Формируем ожидаемый вызов
+        self.assertIn(write_call, mock_open.call_args_list)
 
 class TestHelperFunctions(unittest.TestCase):
     def test_get_top_vacancies(self):
